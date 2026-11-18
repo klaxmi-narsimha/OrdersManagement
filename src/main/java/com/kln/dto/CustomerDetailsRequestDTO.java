@@ -18,6 +18,8 @@ public class CustomerDetailsRequestDTO {
 	
 	private String email;
 	
+	private String password;
+	
 	public CustomerAddressRequestDTO address;
 
 }

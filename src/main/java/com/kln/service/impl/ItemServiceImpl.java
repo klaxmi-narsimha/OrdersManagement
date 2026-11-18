@@ -1,5 +1,7 @@
 package com.kln.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kln.dao.ItemRepository;
 import com.kln.dto.ItemAddRequestDTO;
+import com.kln.dto.ItemResponseDTO;
 import com.kln.exception.ItemNotFoundException;
 import com.kln.model.Item;
 import com.kln.service.ItemService;
@@ -35,6 +38,32 @@ public class ItemServiceImpl implements ItemService {
 
 
 		
+		
+	}
+
+	@Override
+	public List<ItemResponseDTO> items() {
+		
+		List<ItemResponseDTO> items=new ArrayList<>();
+		
+		List<Item> all = itemRepository.findAll();
+		
+		for(Item item:all) {
+			
+			ItemResponseDTO itemRes = new ItemResponseDTO().builder()
+			.id(item.getId())
+			.itemName(item.getItemName())
+			.itemBrand(item.getItemBrand())
+			.itemCategory(item.getItemCategory())
+			.itemQuantity(item.getItemQuantity())
+			.itemprice(item.getItemPrice())
+			.rating(item.getRating())
+			.build();
+			
+			items.add(itemRes);
+		}
+		
+		return items;
 		
 	}
 
